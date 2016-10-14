@@ -8,7 +8,7 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js"></script>
-		<script src="js/master.js"></script>
+		<script type="text/javascript" src="js/master.js"></script>
 	</head>
 	<body>
 		<div class="row">
@@ -43,7 +43,7 @@
 		  
 		  <div class="col-xs-1 separator"></div>
 		  <div class="container container-fluid col-xs-4" id="center-container">
-		    <h2 class="text-center">Game</h2>
+		    <h2 class="text-center" id="location-section">Game</h2>
 		    <hr>
 		    <ul class="nav nav-tabs">
 		      <li class="active"><a href="#">Town Square</a></li>
@@ -52,7 +52,10 @@
 		      <li><a href="#">Inn</a></li>
 		    </ul>
 		    <div class="row top-buffer">
-		    <button class="btn btn-primary">Talk to villager</button> 
+		    	<button class="btn btn-primary">Talk to villager</button> 
+		    </div>
+		    <div id="text-section" class="row text-section">
+		    	Hello.
 		    </div>
 		  </div>
 		  <div class="col-xs-1 separator"></div>
