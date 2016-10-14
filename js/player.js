@@ -1,25 +1,48 @@
-var player = {
-  "name": "Garret",
-  "maxHP": "10",
-  "currentHP": "10",
-  "gold": 100,
-  "items": ["Bronze Sword", "Leather Shield", "Magic Crystal"],
+var Player = function() {
+  this.pname = "Garret";
+  this.maxHP = 10;
+  this.currentHP = 10;
+  this.gold =  100;
+  this.items =  ["Bronze Sword", "Leather Shield", "Magic Crystal"];
 
-  "takeDamage": function(hp){
+  this.getMaxHP = function(){
+		return this.maxHP;
+	}
+  this.getCurrentHP = function(){
+		return this.currentHP;
+	}
+
+  this.takeDamage = function(hp){
     if (this.currentHP > 0) {
       this.currentHP -= hp;
     }
     if (this.currentHP < 0) {
       this.currentHP = 0;
     }
-  },
-
-  "heal": function(hp){
+    console.log(this.currentHP);
+  }
+  this.heal = function(hp){
     if (this.currentHP < this.maxHP) {
       this.currentHP += hp;
     }
     if (this.currentHP > this.maxHP) {
       this.currentHP = this.maxHP;
     }
+    console.log(this.currentHP);
   }
+
+  this.location = tilth.getID(); //The player starts in this location
+
+	this.getLocation = function(){
+		return this.location;
+	}
+
+	this.getLocationName = function(){
+		return Location.getById(this.location).getName();
+	}
+
+	this.updateLocation = function(id){
+		this.location = id;
+	}
+
 }
