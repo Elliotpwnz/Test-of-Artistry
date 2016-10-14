@@ -1,0 +1,30 @@
+#left-container, #center-container, #right-container {
+  background-color: #eee;
+  border-radius: 5px;
+  margin-top: 80px;
+  height: 600px;
+  opacity: .8;
+}
+.item-container {
+  background-color: white;
+  height: 90px;
+  margin-left: 20px;
+  min-width: 100px;
+}
+.top-buffer {
+  margin-top: 20px;
+}
+h2 {
+  font-family: Marmelad;
+}
+hr {
+  border: 0;
+  clear:both;
+  display:block;
+  width: 96%;               
+  background-color:#333;
+  height: 1px;
+}
+body {
+  background-color: #222222;
+}
