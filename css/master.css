@@ -5,11 +5,14 @@
   height: 600px;
   opacity: .8;
 }
-.item-container {
+.inventoryItem {
+  float: left;
+  text-align: center;
   background-color: white;
-  height: 90px;
+  margin-top: 20px;
   margin-left: 20px;
-  min-width: 100px;
+  width: 125px;
+  height: 125px;;
 }
 .top-buffer {
   margin-top: 20px;

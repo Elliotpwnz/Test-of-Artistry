@@ -3,7 +3,9 @@ var Player = function() {
   this.maxHP = 10;
   this.currentHP = 10;
   this.gold =  100;
-  this.items =  ["Bronze Sword", "Leather Shield", "Magic Crystal"];
+  this.inventory = Item.currentInventory();
+  this.bank = 0;
+  this.location = tilth.getID(); //The player starts in this location
 
   this.getMaxHP = function(){
 		return this.maxHP;
@@ -19,7 +21,6 @@ var Player = function() {
     if (this.currentHP < 0) {
       this.currentHP = 0;
     }
-    console.log(this.currentHP);
   }
   this.heal = function(hp){
     if (this.currentHP < this.maxHP) {
@@ -28,10 +29,7 @@ var Player = function() {
     if (this.currentHP > this.maxHP) {
       this.currentHP = this.maxHP;
     }
-    console.log(this.currentHP);
   }
-
-  this.location = tilth.getID(); //The player starts in this location
 
 	this.getLocation = function(){
 		return this.location;
@@ -44,5 +42,9 @@ var Player = function() {
 	this.updateLocation = function(id){
 		this.location = id;
 	}
+
+  this.getInventory = function() {
+    return this.inventory;
+  }
 
 }

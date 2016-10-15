@@ -1,19 +1,18 @@
-var Location = function (name){
+var Location = function (name) {
 
 	this.id = (Location.numInstances++);
 	this.name = name;
 
 	locationObjects.push(this); //Push new object to collection
 
-	this.getName = function(){
+	this.getName = function() {
 		return this.name;
 	}
-
-	this.getID = function(){
+	this.getID = function() {
 		return this.id;
 	}
 
-	Location.getById = function(id){
+	Location.getById = function(id) {
 		return locationObjects[id];
 	}
 }
