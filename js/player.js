@@ -2,6 +2,7 @@ var Player = function() {
   this.pname = "Garret";
   this.maxHP = 10;
   this.currentHP = 10;
+  this.attack =  2;
   this.gold =  100;
   this.inventory = Item.currentInventory();
   this.bank = 0;
@@ -14,6 +15,9 @@ var Player = function() {
 		return this.currentHP;
 	}
 
+  this.getAttack = function() {
+    return this.attack;
+  }
   this.takeDamage = function(hp){
     if (this.currentHP > 0) {
       this.currentHP -= hp;

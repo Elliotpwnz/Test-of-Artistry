@@ -7,13 +7,7 @@
 *****************************/
 
 //----- Game Variables ------
-Location.numInstances = 0; //Location static variable
-var locationObjects = []; //Collection of location objects
-var turth = new Location("Turth");
-var remen = new Location("Remen");
-var tilth = new Location("Tilth");
-
-Item.numInstances = 0; //Location static variable
+Item.numInstances = 0;
 var itemObjects = []; //Collection of item objects
 var inventoryItems = []; //Collection of item objects in players inventory
 var bankItems = []; //Collection of item objects in players bank
@@ -23,6 +17,17 @@ var magicCrystal = new Item("Magic Crystal");
 bronzeSword.addToInventory();
 letherShield.addToInventory();
 magicCrystal.addToInventory();
+
+Location.numInstances = 0; //Location static variable
+var locationObjects = []; //Collection of location objects
+var turth = new Location("Turth");
+var remen = new Location("Remen");
+var tilth = new Location("Tilth");
+
+Enemy.numInstances = 0;
+var enemyObjects = []; //Collection of location objects
+var spider = new Enemy("Spider", 8);
+var wolf = new Enemy("Wolf", 25);
 
 var thePlayer = new Player();
 
@@ -46,6 +51,22 @@ function writeMaxHp(player) {
 function writeCurrentHp(player) {
 	$("#currentHP").html(player.getCurrentHP());
 }
+function writeEnemy(enemy) {
+	var enemyFighting = enemy.getName();
+	string = "<span class='text-danger'> You are now Fighting a " + enemyFighting + "!</span>";
+	string += " <button class='btn btn-danger' onClick='playerAttack("+enemyFighting.toLowerCase()+", thePlayer)'>Attack " +enemyFighting + "</button> "
+	string += " <button class='btn btn-info'>Run</button> "
+	string += enemyFighting + "'s Current HP: <span id='currentEnemyHealth'>" + enemy.getHealth() + "</span>";
+	$('#text-section').html(string);
+}
+function playerAttack(enemy, player) {
+	var dmgTaken = enemy.dealDamage();
+	var dmgDelt = player.getAttack();
+	player.takeDamage(dmgTaken);
+	enemy.takeDamage(dmgDelt);
+  writeCurrentHp(player);
+	$("#currentEnemyHealth").html(enemy.getHealth());
+}
 
 console.log(thePlayer.getInventory());
 
@@ -62,8 +83,17 @@ $(document).ready(function(){
 	$('#center-container').draggable().resizable();
 	$('#right-container').draggable().resizable();
 
-  $(".updateHPDisplay").click(function(){
-		writeCurrentHp(thePlayer);
+	$("#town").click(function(){
+		$(this).parent().children("li").removeClass("active");
+		$(this).addClass("active");
+		$(".tab-display").removeClass("current-tab");
+		$("#townTab").addClass("current-tab");
+	});
+	$("#woods").click(function(){
+		$(this).parent().children("li").removeClass("active");
+		$(this).addClass("active");
+		$(".tab-display").removeClass("current-tab");
+		$("#woodsTab").addClass("current-tab");
 	});
 
 	$("#travelToRemen").click(function(){

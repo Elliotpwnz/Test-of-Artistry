@@ -10,6 +10,7 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js"></script>
 		<script src="js/items.js" type="text/javascript"></script>
 		<script src="js/locations.js" type="text/javascript"></script>
+		<script src="js/enemies.js" type="text/javascript"></script>
 		<script src="js/player.js" type="text/javascript"></script>
 		<script src="js/master.js" type="text/javascript"></script>
 	</head>
@@ -27,17 +28,21 @@
 		    <h2 class="text-center" id="location-section">Game</h2>
 		    <hr>
 		    <ul class="nav nav-tabs">
-		      <li class="active"><a href="#">Town Square</a></li>
-		      <li><a href="#">Woods</a></li>
+		      <li id="town" class="active"><a href="#">Town Square</a></li>
+		      <li id="woods"><a href="#">Woods</a></li>
 		      <li><a href="#">Blacksmith</a></li>
 		      <li><a href="#">Inn</a></li>
 		    </ul>
-		    <div class="row top-buffer">
+		    <div class="row top-buffer tab-display current-tab" id="townTab">
 					<button class="btn btn-primary">Talk to villager</button>
 					<button class="btn btn-primary" id="travelToRemen" onclick="thePlayer.updateLocation(1)">Travel to Remen</button>
 					<button class="btn btn-primary" id="giveCrystal">Give Wizzard Magic Crystal</button>
 					<button class="btn btn-primary" id="stealLocketInsight">Steal Locket of Insight</button>
  		    </div>
+				<div class="row top-buffer tab-display" id="woodsTab">
+					<button class="btn btn-warning" onclick="writeEnemy(spider, thePlayer)">Fight Spider</button>
+					<button class="btn btn-danger" onclick="writeEnemy(wolf, thePlayer)">Fight Wolf</button>
+				</div>
  		    <div id="text-section" class="row text-section">
  		    	Hello.
 		    </div>
@@ -48,8 +53,8 @@
 		    <hr>
 				<h3>Max HP: <span id="maxHP"></span></h3>
 				<h3>Current HP: <span id="currentHP"></span></h3>
-				<button class="btn btn-danger updateHPDisplay" onclick="thePlayer.takeDamage(1)">Take 1 Damage</button>
-				<button class="btn btn-success updateHPDisplay" onclick="thePlayer.heal(1)">Heal 1 Damage</button>
+				<button class="btn btn-danger updateHPDisplay" onclick="thePlayer.takeDamage(1); writeCurrentHp(thePlayer);">Take 1 Damage</button>
+				<button class="btn btn-success updateHPDisplay" onclick="thePlayer.heal(1); writeCurrentHp(thePlayer);">Heal 1 Damage</button>
 		  </div>
 		</div>
 	</body>

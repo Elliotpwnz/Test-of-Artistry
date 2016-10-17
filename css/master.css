@@ -17,6 +17,12 @@
 .top-buffer {
   margin-top: 20px;
 }
+.tab-display {
+  display: none;
+}
+.current-tab {
+  display: block;
+}
 .text-section {
   position: absolute;
   bottom: 0;
