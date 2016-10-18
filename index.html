@@ -41,8 +41,6 @@
 					<button class="btn btn-primary" id="stealLocketInsight">Steal Locket of Insight</button>
  		    </div>
 				<div class="row top-buffer tab-display" id="woodsTab">
-					<button class="btn btn-warning" onclick="writeEnemy(spider, thePlayer)">Fight Spider</button>
-					<button class="btn btn-danger" onclick="writeEnemy(wolf, thePlayer)">Fight Wolf</button>
 				</div>
  		    <div id="text-section" class="row text-section">
  		    	Hello.
@@ -52,6 +50,8 @@
 		  <div class="container container-fluid col-xs-3" id="right-container">
 		    <h2 class="text-center">Stats</h2>
 		    <hr>
+				<h3>Level: <span id="currentLevel"></span></h3>
+				<h3>Experience: <span id="currentExperience"></span></h3>
 				<h3>Max HP: <span id="maxHP"></span></h3>
 				<h3>Current HP: <span id="currentHP"></span></h3>
 				<button class="btn btn-danger updateHPDisplay" onclick="thePlayer.takeDamage(1); writeCurrentHp(thePlayer);">Take 1 Damage</button>

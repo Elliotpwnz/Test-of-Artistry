@@ -1,5 +1,7 @@
 var Player = function() {
   this.pname = "Garret";
+  this.level = 1;
+  this.experience = 0;
   this.maxHP = 10;
   this.currentHP = 10;
   this.attack =  2;
@@ -8,6 +10,27 @@ var Player = function() {
   this.bank = 0;
   this.location = tilth.getID(); //The player starts in this location
 
+  //HighScore Variables
+  this.allTimeKills = 0;
+  this.allTimeGoldEarned = 0;
+
+
+  this.gainExperience = function(exp){
+		this.experience += exp;
+	}
+  this.addGold = function(gold){
+    this.gold += gold;
+  }
+  this.removeGold = function(gold){
+    this.gold -= gold;
+  }
+
+  this.getCurrentLevel = function(){
+		return this.level;
+	}
+  this.getCurrentExperience = function(){
+		return this.experience;
+	}
   this.getMaxHP = function(){
 		return this.maxHP;
 	}
@@ -48,6 +71,7 @@ var Player = function() {
     clearAllButtons();
     writeLocation(this);
     writeCurrentIndividuals(Location.getById(id));
+    writeCurrentEnemies(Location.getById(id));
 	}
 
   this.getInventory = function() {

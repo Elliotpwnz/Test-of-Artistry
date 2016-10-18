@@ -26,8 +26,9 @@ var tilth = new Location("Tilth");
 
 Enemy.numInstances = 0;
 var enemyObjects = []; //Collection of location objects
-var spider = new Enemy("Spider", 8);
-var wolf = new Enemy("Wolf", 25);
+var spider = new Enemy("Spider", 1, tilth);
+var wolf = new Enemy("Wolf", 2, tilth);
+var dragon = new Enemy("Dragon", 20, remen);
 
 NPC.numInstances = 0;
 var npcObjects = [];
@@ -57,6 +58,12 @@ function writeText(string) {
 function writeLocation(player) {
 	$('#location-section').html(player.getLocationName());
 }
+function writeCurrentLevel(player) {
+	$("#currentLevel").html(player.getCurrentLevel());
+}
+function writeCurrentExperience(player) {
+	$("#currentExperience").html(player.getCurrentExperience());
+}
 function writeMaxHp(player) {
 	$("#maxHP").html(player.getMaxHP());
 }
@@ -77,19 +84,29 @@ function writeCurrentIndividuals(location) {
 	for (var i = 0; i < counter+1; ++i){
 		var theIndividual = location.currentIndividuals[i];
 		var btnFinder = "#talkToNPC"+theIndividual.getID();
-		console.log($(btnFinder))
+		console.log($(btnFinder));
 		$(btnFinder).click(theIndividual.getTalkTo());
 	}
 }
 
-function writeEnemy(enemy) {
-	var enemyFighting = enemy.getName();
-	string = "<span class='text-danger'> You are now Fighting a " + enemyFighting + "!</span>";
-	string += " <button class='btn btn-danger' onClick='playerAttack("+enemyFighting.toLowerCase()+", thePlayer)'>Attack " +enemyFighting + "</button> "
-	string += " <button class='btn btn-info'>Run</button> "
-	string += enemyFighting + "'s Current HP: <span id='currentEnemyHealth'>" + enemy.getHealth() + "</span>";
-	$('#text-section').html(string);
+function writeCurrentEnemies(location) {
+	var btn ="";
+	var counter = 0;
+	for (var i = 0; i < location.currentEnemies.length; ++i){
+		counter = i;
+		var theEnemy = location.currentEnemies[i];
+		btn += '<button class="btn btn-warning enemy" id="attackEnemy'+theEnemy.getID()+'">Attack '
+			+theEnemy.getName()+'</button>';
+	}
+	$("#woodsTab").html(btn); //Don't need to include anything but specific enemies
+	for (var i = 0; i < counter+1; ++i){
+		var theEnemy = location.currentEnemies[i];
+		var btnFinder = "#attackEnemy"+theEnemy.getID();
+		console.log($(btnFinder));
+		$(btnFinder).on('click', function(){ theEnemy.writeAttack(); });
+	}
 }
+
 
 function writeConfirmThis(func){ //writeConfirmThis creates a button that calls a function if clicked
 	return " <button class='btn btn-primary npc' onclick='"+func+"''>Confirm</button>";
@@ -123,6 +140,9 @@ $(document).ready(function(){
 	console.log(Location.getById(thePlayer.getLocation()));
     writeText("You are currently in " + thePlayer.getLocationName());
     writeCurrentIndividuals(Location.getById(thePlayer.getLocation()));
+		writeCurrentEnemies(Location.getById(thePlayer.getLocation()));
+	writeCurrentLevel(thePlayer);
+	writeCurrentExperience(thePlayer);
 	writeMaxHp(thePlayer);
 	writeCurrentHp(thePlayer);
 
