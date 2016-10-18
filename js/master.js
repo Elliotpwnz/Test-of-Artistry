@@ -29,6 +29,11 @@ var enemyObjects = []; //Collection of location objects
 var spider = new Enemy("Spider", 8);
 var wolf = new Enemy("Wolf", 25);
 
+NPC.numInstances = 0;
+var npcObjects = [];
+var thomas = new NPC("Thomas", tilth.getID());
+thomas.updateTalkToFunc(function (){writeText("I am a unique NPC!");}); //Custom talkTo() function
+
 var thePlayer = new Player();
 
 //----- Game functions -----
