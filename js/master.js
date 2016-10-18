@@ -32,7 +32,9 @@ var wolf = new Enemy("Wolf", 25);
 NPC.numInstances = 0;
 var npcObjects = [];
 var thomas = new NPC("Thomas", tilth);
-thomas.updateTalkToFunc(function (){writeText("I am a unique NPC named "+thomas.getName()+"!");}); //Custom talkTo() function
+thomas.updateTalkToFunc(function (){writeText("I am a unique NPC named "+thomas.getName()+"!"
+ +" Should I move to Remen?" + writeConfirmThis("thomas.updateLocation(remen);"
+ +" thomas.updateTalkToFunc(function(){writeText(\"Thanks for moving me to Remen earlier!\");});clearText();"));}); //Custom talkTo() function
 var bobTheInkeeper = new NPC("Bob the Innkeeper", tilth);
 var beggarJoe = new NPC("Beggar Joe", remen);
 var debugNPC = new NPC("Debug", remen);
@@ -61,20 +63,6 @@ function writeMaxHp(player) {
 function writeCurrentHp(player) {
 	$("#currentHP").html(player.getCurrentHP());
 }
-function writeEnemy(enemy) {
-	var enemyFighting = enemy.getName();
-	string = "<span class='text-danger'> You are now Fighting a " + enemyFighting + "!</span>";
-	string += " <button class='btn btn-danger' onClick='playerAttack("+enemyFighting.toLowerCase()+", thePlayer)'>Attack " +enemyFighting + "</button> "
-	string += " <button class='btn btn-info'>Run</button> "
-	string += enemyFighting + "'s Current HP: <span id='currentEnemyHealth'>" + enemy.getHealth() + "</span>";
-	$('#text-section').html(string);
-}
-function clearAllButtons(){
-	$('.current-tab').html("");
-}
-function clearSpecificButtons(theClass){
-	$('.'+theClass).remove();
-}
 
 function writeCurrentIndividuals(location) {
 	var btn ="";
@@ -92,6 +80,28 @@ function writeCurrentIndividuals(location) {
 		console.log($(btnFinder))
 		$(btnFinder).click(theIndividual.getTalkTo());
 	}
+}
+
+function writeEnemy(enemy) {
+	var enemyFighting = enemy.getName();
+	string = "<span class='text-danger'> You are now Fighting a " + enemyFighting + "!</span>";
+	string += " <button class='btn btn-danger' onClick='playerAttack("+enemyFighting.toLowerCase()+", thePlayer)'>Attack " +enemyFighting + "</button> "
+	string += " <button class='btn btn-info'>Run</button> "
+	string += enemyFighting + "'s Current HP: <span id='currentEnemyHealth'>" + enemy.getHealth() + "</span>";
+	$('#text-section').html(string);
+}
+
+function writeConfirmThis(func){ //writeConfirmThis creates a button that calls a function if clicked
+	return " <button class='btn btn-primary npc' onclick='"+func+"''>Confirm</button>";
+}
+function clearText(){
+	$('#text-section').html("");
+}
+function clearAllButtons(){
+	$('.current-tab').html("");
+}
+function clearSpecificButtons(theClass){
+	$('.'+theClass).remove();
 }
 
 function playerAttack(enemy, player) {
