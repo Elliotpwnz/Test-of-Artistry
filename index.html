@@ -34,11 +34,12 @@
 		      <li><a href="#">Blacksmith</a></li>
 		      <li><a href="#">Inn</a></li>
 		    </ul>
+		    <div class="row top-buffer tab-display" id="gameButtons"></div>
 		    <div class="row top-buffer tab-display current-tab" id="townTab">
-					<button class="btn btn-primary" onclick="thomas.talkTo();">Talk to villager</button>
 					<button class="btn btn-primary" id="travelToRemen" onclick="thePlayer.updateLocation(1)">Travel to Remen</button>
 					<button class="btn btn-primary" id="giveCrystal">Give Wizzard Magic Crystal</button>
 					<button class="btn btn-primary" id="stealLocketInsight">Steal Locket of Insight</button>
+					<button class="btn btn-primary" id="moveThomas" onclick="thomas.updateLocation(remen);">Move Thomas to Remen.</button>
  		    </div>
 				<div class="row top-buffer tab-display" id="woodsTab">
 					<button class="btn btn-warning" onclick="writeEnemy(spider, thePlayer)">Fight Spider</button>

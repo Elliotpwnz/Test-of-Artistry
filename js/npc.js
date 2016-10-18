@@ -1,11 +1,17 @@
 var NPC = function(name, location) {
+  this.id = (NPC.numInstances++);
   this.name = name;
   this.maxHP = 10;
   this.currentHP = 10;
   this.attack =  2;
   this.inventory = Item.currentInventory(); //Should NPCs hold items? 
   this.bank = 0;
-  this.location = location; //The npc is in this location
+  this.location = location.getID(); //The npc is in this location
+  location.addToCurrentIndividuals(this); //Add the npc to the locations list of individuals
+
+  this.getID = function(){
+    return this.id;
+  }
 
   this.getName = function(){
     return this.name;
@@ -59,8 +65,12 @@ var NPC = function(name, location) {
 		return Location.getById(this.location).getName();
 	}
 
-	this.updateLocation = function(id){
-		this.location = id;
+	this.updateLocation = function(location){
+    Location.getById(this.location).removeFromCurrentIndividuals(this);
+    this.location = location.getID();
+    location.addToCurrentIndividuals(this);
+    clearSpecificButtons('npc');
+    writeCurrentIndividuals(Location.getById(thePlayer.getLocation()));
 	}
 
   this.getInventory = function() {
@@ -68,7 +78,11 @@ var NPC = function(name, location) {
   }
 
   this.talkTo = function() {
-    writeText("Why hello there! Welcome to "+this.getLocationName()+"! My name is "+this.getName()+".");
+    writeText("Why hello there! I am a generic NPC.");
+  }
+
+  this.getTalkTo = function() {
+    return this.talkTo;
   }
 
   this.updateTalkToFunc = function(func){

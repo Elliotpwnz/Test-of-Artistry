@@ -45,6 +45,9 @@ var Player = function() {
 
 	this.updateLocation = function(id){
 		this.location = id;
+    clearAllButtons();
+    writeLocation(this);
+    writeCurrentIndividuals(Location.getById(id));
 	}
 
   this.getInventory = function() {

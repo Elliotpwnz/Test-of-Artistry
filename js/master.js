@@ -31,9 +31,14 @@ var wolf = new Enemy("Wolf", 25);
 
 NPC.numInstances = 0;
 var npcObjects = [];
-var thomas = new NPC("Thomas", tilth.getID());
-thomas.updateTalkToFunc(function (){writeText("I am a unique NPC!");}); //Custom talkTo() function
+var thomas = new NPC("Thomas", tilth);
+thomas.updateTalkToFunc(function (){writeText("I am a unique NPC named "+thomas.getName()+"!");}); //Custom talkTo() function
+var bobTheInkeeper = new NPC("Bob the Innkeeper", tilth);
+var beggarJoe = new NPC("Beggar Joe", remen);
+var debugNPC = new NPC("Debug", remen);
+debugNPC.updateTalkToFunc(function (){writeText("I am an NPC named Debug. I am here to help debug problems!");});
 
+//The player variable
 var thePlayer = new Player();
 
 //----- Game functions -----
@@ -64,6 +69,31 @@ function writeEnemy(enemy) {
 	string += enemyFighting + "'s Current HP: <span id='currentEnemyHealth'>" + enemy.getHealth() + "</span>";
 	$('#text-section').html(string);
 }
+function clearAllButtons(){
+	$('.current-tab').html("");
+}
+function clearSpecificButtons(theClass){
+	$('.'+theClass).remove();
+}
+
+function writeCurrentIndividuals(location) {
+	var btn ="";
+	var counter = 0;
+	for (var i = 0; i < location.currentIndividuals.length; ++i){
+		counter = i;
+		var theIndividual = location.currentIndividuals[i];
+		btn += '<button class="btn btn-primary npc" id="talkToNPC'+theIndividual.getID()+'">Talk to '
+			+theIndividual.getName()+'</button>';
+	}
+	$(".current-tab").html($(".current-tab").html() + btn);
+	for (var i = 0; i < counter+1; ++i){
+		var theIndividual = location.currentIndividuals[i];
+		var btnFinder = "#talkToNPC"+theIndividual.getID();
+		console.log($(btnFinder))
+		$(btnFinder).click(theIndividual.getTalkTo());
+	}
+}
+
 function playerAttack(enemy, player) {
 	var dmgTaken = enemy.dealDamage();
 	var dmgDelt = player.getAttack();
@@ -80,7 +110,9 @@ $(document).ready(function(){
 	//write all initial data to the page
 	writeInventory(thePlayer.getInventory());
 	writeLocation(thePlayer);
-  writeText("You are currently in " + thePlayer.getLocationName());
+	console.log(Location.getById(thePlayer.getLocation()));
+    writeText("You are currently in " + thePlayer.getLocationName());
+    writeCurrentIndividuals(Location.getById(thePlayer.getLocation()));
 	writeMaxHp(thePlayer);
 	writeCurrentHp(thePlayer);
 
